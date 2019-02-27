@@ -1,0 +1,26 @@
+management:
+  port: 0
+  security:
+    enabled: false
+
+server:
+  port: 9000
+
+spring:
+  datasource:
+    continue-on-error: true
+    driver-class-name: oracle.jdbc.OracleDriver
+    password: ${AWS_PASSWORD}
+    url: ${AWS_HOST}
+    username: ${AWS_USERNAME}
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+springfox:
+  documentation:
+    info:
+      title: Invillia - Store Service
+      description: Docs for Invillia's Backend Challenge Stores Service
+      version: 1.0
+    base-package: br.com.invillia.store.controller
