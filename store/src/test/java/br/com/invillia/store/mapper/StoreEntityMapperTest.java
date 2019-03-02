@@ -13,7 +13,7 @@ import br.com.invillia.store.request.CreateStoreRequest;
 public class StoreEntityMapperTest {
 
     @Test
-    void entity_empty_if_request_null() {
+    public void entity_empty_if_request_null() {
         final StoreEntity actual = new StoreEntityMapper().apply(null);
         assertNotNull(actual);
         assertNull(actual.getId());

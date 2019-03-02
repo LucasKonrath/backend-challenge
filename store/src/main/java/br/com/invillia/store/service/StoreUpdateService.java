@@ -10,6 +10,7 @@ import br.com.invillia.store.entity.StoreEntity;
 import br.com.invillia.store.error.BadRequestException;
 import br.com.invillia.store.repository.StoreRepository;
 import br.com.invillia.store.request.UpdateStoreRequest;
+import br.com.invillia.store.validator.UpdateStoreRequestValidator;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -19,19 +20,24 @@ public class StoreUpdateService {
     @Autowired
     private StoreRepository storeRepository;
 
-    @Transactional
-    public void updateStore(final UpdateStoreRequest updateStoreRequest){
+    @Autowired
+    private UpdateStoreRequestValidator validator;
 
-        log.info("Updating store: {}", updateStoreRequest);
-        final StoreEntity storeEntity = storeRepository.findById(updateStoreRequest.getId());
+    @Transactional
+    public void updateStore(final UpdateStoreRequest request){
+
+        validator.accept(request);
+
+        log.info("Updating store: {}", request);
+        final StoreEntity storeEntity = storeRepository.findById(request.getId());
 
         if(isNull(storeEntity)){
-            log.warn("Informed store has not been found: {}", updateStoreRequest);
-            throw new BadRequestException();
+            log.warn("Informed store has not been found: {}", request);
+            throw new BadRequestException("Informed Id does not correspond to an existing store.");
         }
 
-        storeEntity.setName(updateStoreRequest.getName());
-        storeEntity.setAddress(updateStoreRequest.getAddress());
+        storeEntity.setName(request.getName());
+        storeEntity.setAddress(request.getAddress());
 
         storeRepository.save(storeEntity);
     }

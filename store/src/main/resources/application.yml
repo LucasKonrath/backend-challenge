@@ -11,7 +11,7 @@ spring:
     continue-on-error: true
     driver-class-name: oracle.jdbc.OracleDriver
     password: ${AWS_PASSWORD}
-    url: ${AWS_HOST}
+    url: jdbc:oracle:thin:@invillia-challenge.cmvtuhydnms5.us-east-2.rds.amazonaws.com:1521:invillia
     username: ${AWS_USERNAME}
   jpa:
     hibernate:

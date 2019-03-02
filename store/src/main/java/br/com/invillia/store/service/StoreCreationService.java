@@ -8,6 +8,7 @@ import br.com.invillia.store.entity.StoreEntity;
 import br.com.invillia.store.mapper.StoreEntityMapper;
 import br.com.invillia.store.repository.StoreRepository;
 import br.com.invillia.store.request.CreateStoreRequest;
+import br.com.invillia.store.validator.CreateStoreRequestValidator;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -17,11 +18,16 @@ public class StoreCreationService {
     @Autowired
     private StoreRepository storeRepository;
 
-    @Transactional
-    public void createStore(final CreateStoreRequest createStoreRequest){
+    @Autowired
+    private CreateStoreRequestValidator validator;
 
-        log.info("Creating store: {}", createStoreRequest);
-        final StoreEntity storeEntity = new StoreEntityMapper().apply(createStoreRequest);
+    @Transactional
+    public void createStore(final CreateStoreRequest request){
+
+        validator.accept(request);
+
+        log.info("Creating store: {}", request);
+        final StoreEntity storeEntity = new StoreEntityMapper().apply(request);
 
         storeRepository.save(storeEntity);
     }
