@@ -1,0 +1,26 @@
+management:
+  port: 0
+  security:
+    enabled: false
+
+server:
+  port: 9000
+
+spring:
+  datasource:
+    continue-on-error: true
+    driver-class-name: oracle.jdbc.OracleDriver
+    password: ${AWS_PASSWORD}
+    url: jdbc:oracle:thin:@invillia-challenge.cmvtuhydnms5.us-east-2.rds.amazonaws.com:1521:invillia
+    username: ${AWS_USERNAME}
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+springfox:
+  documentation:
+    info:
+      title: Invillia - Order Service
+      description: Docs for Invillia's Backend Challenge Orders Service
+      version: 1.0
+    base-package: br.com.invillia.store.controller
