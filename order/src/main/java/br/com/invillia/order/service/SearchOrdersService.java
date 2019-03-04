@@ -65,7 +65,7 @@ public class SearchOrdersService {
         }
 
         if (nonNull(finalConfirmationDate)) {
-            predicate = predicate.and(entity.confirmationDate.after(finalConfirmationDate));
+            predicate = predicate.and(entity.confirmationDate.before(finalConfirmationDate));
         }
 
         log.info("Searching orders for parameters: id {}, address {}, status:{}", id, address, status);
@@ -112,6 +112,7 @@ public class SearchOrdersService {
                 .orElse(null)
             )
             .items(items)
+            .id(orderEntity.getId())
             .build();
     }
 }
