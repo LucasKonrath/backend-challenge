@@ -1,0 +1,12 @@
+swagger:
+  enabled: true
+  suffix: /v2/api-docs
+
+zuul:
+  host:
+    socket-timeout-millis: 30000
+  routes:
+    store:
+      url: http://localhost:9000
+    order:
+      url: http://localhost:9001

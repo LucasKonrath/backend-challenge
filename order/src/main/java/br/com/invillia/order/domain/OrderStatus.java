@@ -8,5 +8,6 @@ import lombok.RequiredArgsConstructor;
 public enum OrderStatus {
 
     PENDING_PAYMENT,
-    PAID
+    PAID,
+    REFUNDED
 }

@@ -17,7 +17,7 @@ import br.com.invillia.store.service.StoreCreationService;
 import br.com.invillia.store.service.StoreUpdateService;
 
 @RestController
-@RequestMapping("/store")
+@RequestMapping
 public class StoreController implements StoreApi {
 
     @Autowired
